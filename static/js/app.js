@@ -2,14 +2,17 @@
 function buildMetadata(sample) {
   d3.json("https://static.bc-edx.com/data/dl-1-2/m14/lms/starter/samples.json").then((data) => {
 
+    console.log(data);
+
     // get the metadata field
-
-
+    
+    // const metadata = data.metadata; 
     // Filter the metadata for the object with the desired sample number
-
-
-    // Use d3 to select the panel with id of `#sample-metadata`
-
+    // const sampleMetadata = metadata.find(item => item.id ===sample);
+    // console.log(sampleMetadata);
+    // // Use d3 to select the panel with id of `#sample-metadata`
+    // let smetadata = d3.select("#sample-metadata").text();
+    // console.log("sample-metadata is:", smetadata);
 
     // Use `.html("") to clear any existing metadata
 
@@ -17,8 +20,8 @@ function buildMetadata(sample) {
     // Inside a loop, you will need to use d3 to append new
     // tags for each key-value in the filtered metadata.
 
-  });
-}
+  // });
+})};
 
 // function to build both charts
 function buildCharts(sample) {
@@ -56,15 +59,30 @@ function init() {
   d3.json("https://static.bc-edx.com/data/dl-1-2/m14/lms/starter/samples.json").then((data) => {
 
     // Get the names field
-
-
+    const options = data.names; 
+    console.log(options);
     // Use d3 to select the dropdown with id of `#selDataset`
-
+    const dropdownMenu = d3.select("#selDataset")
+      .append("select");
+    // console.log("dataset is:", dataset);
+    dropdownMenu.selectAll("option")
+      .data(options)
+      .enter()
+      .append("option")
+      .text(d => d)
+      .attr("value", d => d);
 
     // Use the list of sample names to populate the select options
     // Hint: Inside a loop, you will need to use d3 to append a new
     // option for each sample name.
+    // let dataset = dropdownMenu.property("");
+    dropdownMenu.on("change", function() {
+      const selectedValue = d3.select(this).property("value");
+      console.log("Selected:" , selectedValue);
+    }
 
+
+    )
 
     // Get the first sample from the list
 
@@ -76,9 +94,11 @@ function init() {
 
 // Function for event listener
 function optionChanged(newSample) {
+  console.log(newSample);
   // Build charts and metadata panel each time a new sample is selected
 
 }
 
 // Initialize the dashboard
 init();
+buildMetadata(940)
