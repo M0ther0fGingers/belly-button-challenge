@@ -1,24 +1,28 @@
 // Build the metadata panel
 function buildMetadata(sample) {
   d3.json("https://static.bc-edx.com/data/dl-1-2/m14/lms/starter/samples.json").then((data) => {
-
     console.log(data);
 
     // get the metadata field
-    
-    // const metadata = data.metadata; 
+    let mdata = d3.selectAll(data.metadata)
+    console.log(mdata);
+  
     // Filter the metadata for the object with the desired sample number
-    // const sampleMetadata = metadata.find(item => item.id ===sample);
-    // console.log(sampleMetadata);
-    // // Use d3 to select the panel with id of `#sample-metadata`
-    // let smetadata = d3.select("#sample-metadata").text();
-    // console.log("sample-metadata is:", smetadata);
+    d3.selectAll("#selDataset").on("change", updatePlotly);
 
+    // Use d3 to select the panel with id of `#sample-metadata`
+    function updatePlotly() {
+      let dropdownMenu = d3.select("#selDataset");
+      let dataset = dropdownMenu.property("value");
+    }
     // Use `.html("") to clear any existing metadata
-
+    d3.select("metadata").html("");
 
     // Inside a loop, you will need to use d3 to append new
     // tags for each key-value in the filtered metadata.
+      for (let i = 0; i < mdata.length; i++) {
+        
+      }
 
   // });
 })};
@@ -79,10 +83,8 @@ function init() {
     dropdownMenu.on("change", function() {
       const selectedValue = d3.select(this).property("value");
       console.log("Selected:" , selectedValue);
-    }
-
-
-    )
+      }
+  )
 
     // Get the first sample from the list
 
