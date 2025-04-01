@@ -111,31 +111,29 @@ function init() {
         .append("option")
         .text(options[i])
         .property("value", options[i]);
-    };
+        
+      };
+      let firstItem = options[0];
 
-
-    // let dataset = dropdownMenu.property("");
-    // dropdownMenu.on("change", function() {
-    //   const selectedValue = d3.select(this).property("value");
-    //   console.log("Selected:" , selectedValue);
+      // Build charts and metadata panel with the first sample
+    buildCharts(firstItem);
+    buildMetadata(firstItem);
+      
       }
-  )
+    );
 
     // Get the first sample from the list
 
-
-    // Build charts and metadata panel with the first sample
-
-  });
-}
+  };
 
 // Function for event listener
 function optionChanged(newSample) {
   console.log(newSample);
   // Build charts and metadata panel each time a new sample is selected
-
+  buildCharts(newSample);
+  buildMetadata(newSample);
 }
 
 // Initialize the dashboard
 init();
-buildMetadata(940)
+// buildMetadata(940)
