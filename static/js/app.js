@@ -90,6 +90,7 @@ function init() {
     let options = data.names; 
     console.log(options);
     // Use d3 to select the dropdown with id of `#selDataset`
+    // the select funtion finds selDataset in the HTML code. 
     let selector = d3.select("#selDataset")
 
     // Use the list of sample names to populate the select options
@@ -105,9 +106,11 @@ function init() {
       };
 
     // Get the first sample from the list
+    // use index [0] to select the first item on the options list
     let firstItem = options[0];
 
     // Build charts and metadata panel with the first sample
+    // use the firstItem value defined above in the functions on first load
     buildCharts(firstItem);
     buildMetadata(firstItem);
       
@@ -119,6 +122,8 @@ function init() {
 function optionChanged(newSample) {
   console.log(newSample);
   // Build charts and metadata panel each time a new sample is selected
+  // using newSample in the buildCharts and buildMetadata functions changes the 
+  // output of the charts and metadata when a new sample is selected
   buildCharts(newSample);
   buildMetadata(newSample);
 }
