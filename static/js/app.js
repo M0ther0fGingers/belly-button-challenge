@@ -8,11 +8,13 @@ function buildMetadata(sample) {
     console.log(mdata);
   
     // Filter the metadata for the object with the desired sample number
+    // use the .filter function to find ID that matches sample
     let sample_id = mdata.filter(x => x.id == sample);
     // Select the first sample in the list
     let result = sample_id[0]
 
     // Use d3 to select the panel with id of `#sample-metadata`
+    // create new variable to fill the demographics table using .select
     let demo_table = d3.select("#sample-metadata");
       
     // Use `.html("") to clear any existing metadata
@@ -20,6 +22,7 @@ function buildMetadata(sample) {
 
     // Inside a loop, you will need to use d3 to append new
     // tags for each key-value in the filtered metadata.
+    // add data to the demo_table
       for (key in result) {
         demo_table.append("h6").text(`${key.toUpperCase()}: ${result[key]}`);
       }
@@ -33,6 +36,7 @@ function buildCharts(sample) {
     let sample_data = data.samples
 
     // Filter the samples for the object with the desired sample number
+    // filter on the sample_data created above to find where id matches sample
     let sample_id = sample_data.filter(x => x.id == sample);
     let result = sample_id[0]
 
